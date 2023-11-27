@@ -1,13 +1,30 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
-const Form = ({ action }) => {
+const Form = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const [task, setTask] = useState({
     name: "",
     description: "",
     priority: "low",
     status: 0, /* 0: pending, 1: completed */ 
   });
+
+  useEffect(() => {
+    if (id) {
+      const tasksInStorage = JSON.parse(localStorage.getItem("tasks")) || [];
+      const existingTask = tasksInStorage.find((t) => t.id === parseInt(id));
+
+      if (existingTask) {
+        setTask(existingTask);
+      } else {
+        alert("Task not found");
+        navigate("/");
+      }
+    }
+  }, [id, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,14 +34,23 @@ const Form = ({ action }) => {
       return;
     }
 
-    const taskId = Date.now() + Math.random(); 
     const tasksInStorage = JSON.parse(localStorage.getItem("tasks")) || [];
-    const newTask = { id: taskId, ...task };
-    const updatedTasks = [...tasksInStorage, newTask];
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+
+    if (id) {
+      const updatedTasks = tasksInStorage.map((t) =>
+        t.id === parseInt(id) ? { ...t, ...task } : t
+      );
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    } else {
+      const taskId = tasksInStorage.length + 1; 
+      const newTask = { id: taskId, ...task };
+      const updatedTasks = [...tasksInStorage, newTask];
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    }
 
     setTask({ name: "", description: "", priority: "low", status: 0 });
-    alert("Task added successfully!");
+    alert("Task saved successfully!");
+    navigate("/");
   };
 
   const handleChange = (e) => {
@@ -35,10 +61,10 @@ const Form = ({ action }) => {
   return (
     <>
       <h2>
-        {action === "edit" ? "Edit Task" : "Create Task"}
+        {id ? "Edit Task" : "Create Task"}
       </h2>
 
-      <Link to="/" >
+      <Link to="/">
         Back to List
       </Link>
 
@@ -85,3 +111,4 @@ const Form = ({ action }) => {
 };
 
 export default Form;
+
