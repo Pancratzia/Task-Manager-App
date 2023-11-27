@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import "./css/main.css";
 import List from "./components/List";
 import Form from "./components/Form";
 

@@ -5,7 +5,6 @@ const List = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    // Obtener las tareas desde el localStorage al montar el componente
     const tasksInStorage = JSON.parse(localStorage.getItem("tasks")) || [];
     setTasks(tasksInStorage);
   }, []); 

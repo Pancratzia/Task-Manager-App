@@ -1,0 +1,49 @@
+@use "../base/variables" as v;
+
+@mixin phone {
+  @media (min-width: 480px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktopXL {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin container {
+  width: 95%;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+@mixin container-md {
+  width: 90%;
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+@mixin container-sm {
+  width: 85%;
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
+@mixin grid($columnas, $espaciado) {
+  display: grid;
+  gap: $espaciado;
+  grid-template-columns: repeat($columnas, 1fr);
+}
