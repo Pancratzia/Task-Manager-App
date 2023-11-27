@@ -6,6 +6,7 @@ const Form = ({ action }) => {
     name: "",
     description: "",
     priority: "low",
+    status: 0, /* 0: pending, 1: completed */ 
   });
 
   const handleSubmit = (e) => {
@@ -22,8 +23,7 @@ const Form = ({ action }) => {
     const updatedTasks = [...tasksInStorage, newTask];
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
 
-    // Optionally, you can reset the form or perform other actions
-    setTask({ name: "", description: "", priority: "low" });
+    setTask({ name: "", description: "", priority: "low", status: 0 });
     alert("Task added successfully!");
   };
 

@@ -1,27 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const List = () => {
-  // Obtener las tareas desde el localStorage
-  const tasksInStorage = JSON.parse(localStorage.getItem("tasks")) || [];
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    // Obtener las tareas desde el localStorage al montar el componente
+    const tasksInStorage = JSON.parse(localStorage.getItem("tasks")) || [];
+    setTasks(tasksInStorage);
+  }, []); 
+
+  const handleCheckboxChange = (taskId) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, status: task.status === 0 ? 1 : 0 } : task
+    );
+
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  };
+
+  const handleDeleteButtonClick = (taskId) => {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  };
 
   return (
     <div>
-      <Link to="/create">
-        Create Task
-      </Link>
+      <Link to="/create">Create Task</Link>
 
       <h2>Task List</h2>
 
-      {tasksInStorage.length === 0 ? (
+      {tasks.length === 0 ? (
         <p>No tasks available</p>
       ) : (
         <ul>
-          {tasksInStorage.map((task) => (
+          {tasks.map((task) => (
             <li key={task.id}>
-              <Link to={`/edit/${task.id}`}>
+              <Link to={`/edit/${task.id}`} className={task.status === 1 ? "completed" : ""}>
                 {task.name} - Priority: {task.priority}
               </Link>
+
+              <button onClick={() => handleDeleteButtonClick(task.id)}>Delete</button>
+              
+              
+                <input
+                  type="checkbox"
+                  name="completed"
+                  checked={task.status === 1}
+                  onChange={() => handleCheckboxChange(task.id)}
+                />
             </li>
           ))}
         </ul>
