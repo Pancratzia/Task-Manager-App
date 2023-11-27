@@ -1,3 +1,6 @@
+@use './variables' as v;
+@use './mixins' as m;
+
 *{
     box-sizing: border-box;
 }
@@ -31,4 +34,42 @@ ul, ol{
 a{
     text-decoration: none;
     color: inherit;
+}
+
+.btn{
+    all: unset;
+    display: block;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .3s ease;
+    margin: 2rem 0;
+    text-align: center;
+
+    @include m.tablet{
+        display: inline-block;
+    }
+
+    &--primary{
+        background-color: v.$red;
+        color: v.$cream;
+
+        &:hover{
+            background-color: darken(v.$red, 10%);
+        }
+    }
+
+    &--secondary{
+        background-color: v.$cream;
+        color: v.$red;
+
+        &:hover{
+            background-color: lighten(v.$cream, 10%);
+        }
+    }
+
+    &:hover{
+        cursor: pointer;
+    }
 }

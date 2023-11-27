@@ -1,0 +1,26 @@
+@use './variables' as v;
+@use './mixins' as m;
+
+.layout{
+    @include m.container;
+    margin: 2rem auto;
+
+    &__title{
+        text-align: center;
+        font-size: clamp(4rem, 6vw, 10rem);
+        background-image: linear-gradient(90deg, v.$red, v.$peach);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        border: .2rem dashed v.$peach;
+    }
+
+    &__subtitle{
+        text-align: right;
+        font-size: clamp(1.2rem, 2vw, 2.6rem);
+        color: v.$peach;
+        padding: 2rem 0;
+        text-transform: uppercase;
+        opacity: .4;
+    }
+}

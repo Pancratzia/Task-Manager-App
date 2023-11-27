@@ -1,0 +1,48 @@
+@use './../base/variables' as v;
+@use './../base/mixins' as m;
+
+.list{
+
+    &__btn{
+        @include m.tablet{
+            text-align: right;
+        }
+    }
+
+    &__title{
+        text-align: center;
+        font-size: clamp(2.6rem, 6vw, 4.6rem);  
+        text-transform: uppercase;
+        background-image: linear-gradient(90deg, v.$blue, v.$peach);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    &__subtitle{
+        text-align: center;
+        font-size: clamp(1.6rem, 2vw, 2rem);
+        margin: 2rem 0;
+        color: v.$blue;
+        text-transform: capitalize;
+        opacity: .6;
+    }
+
+    &__empty{
+        text-align: center;
+        font-size: clamp(1.6rem, 2vw, 2.6rem);
+        color: v.$peach;
+        padding: 2rem 0;
+        margin: 2rem 0;
+        border: .2rem dashed v.$peach;
+    }
+
+    &__item{
+        background-color: v.$cream;
+        padding: 2rem;
+        margin: 2rem 0;
+        border-radius: 1rem;
+        display: flex;
+        justify-content: space-between;
+    }
+}

@@ -6,13 +6,13 @@ import Form from "./components/Form";
 function App() {
   const Layout = () => {
     return (
-      <div>
-        <h1>
+      <div className="layout">
+        <h1 className="layout__title">
           TASK MANAGER
         </h1>
 
-        <h2>
-          An AulaCube Project
+        <h2 className="layout__subtitle">
+          A Project for AulaCube
         </h2>
 
         <Outlet />

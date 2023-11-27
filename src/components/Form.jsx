@@ -20,7 +20,6 @@ const Form = () => {
       if (existingTask) {
         setTask(existingTask);
       } else {
-        alert("Task not found");
         navigate("/");
       }
     }
@@ -50,7 +49,10 @@ const Form = () => {
 
     setTask({ name: "", description: "", priority: "low", status: 0 });
     alert("Task saved successfully!");
-    navigate("/");
+
+    if (id) {
+      navigate("/");
+    }
   };
 
   const handleChange = (e) => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Task from "./Task";
 
 const List = () => {
   const [tasks, setTasks] = useState([]);
@@ -26,31 +27,21 @@ const List = () => {
   };
 
   return (
-    <div>
-      <Link to="/create">Create Task</Link>
+    <div className="list">
 
-      <h2>Task List</h2>
+      <div className="list__btn">
+        <Link to="/create" className="btn btn--primary">Create Task</Link>
+      </div>
+
+      <h2 className="list__title">Task List</h2>
+      <p className="list__subtitle">Mark a task as completed by clicking on their respective checkbox</p>
 
       {tasks.length === 0 ? (
-        <p>No tasks available</p>
+        <p className="list__empty">No tasks available</p>
       ) : (
         <ul>
           {tasks.map((task) => (
-            <li key={task.id}>
-              <Link to={`/edit/${task.id}`} className={task.status === 1 ? "completed" : ""}>
-                {task.name} - Priority: {task.priority}
-              </Link>
-
-              <button onClick={() => handleDeleteButtonClick(task.id)}>Delete</button>
-              
-              
-                <input
-                  type="checkbox"
-                  name="completed"
-                  checked={task.status === 1}
-                  onChange={() => handleCheckboxChange(task.id)}
-                />
-            </li>
+            <Task key={task.id} task={task} handleCheckboxChange={handleCheckboxChange} handleDeleteButtonClick={handleDeleteButtonClick} />
           ))}
         </ul>
       )}
