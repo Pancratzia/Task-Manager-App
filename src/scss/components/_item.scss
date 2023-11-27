@@ -1,0 +1,42 @@
+@use './../base/variables' as v;
+@use './../base/mixins' as m;
+
+.item{
+
+    &__description{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    &__checkbox{
+        accent-color: v.$red;
+    }
+
+    &__status{
+        
+        font-weight: 700;
+
+        &--completed{
+            text-decoration: line-through;
+        }
+
+        &--pending{
+            text-decoration: none;
+        }
+    }
+
+    &__delete{
+        all: unset;
+        color: v.$red;
+        font-weight: 900;
+
+        &:hover{
+            color: darken(v.$red, 10%);
+            cursor: pointer;
+        }
+    }
+
+
+}

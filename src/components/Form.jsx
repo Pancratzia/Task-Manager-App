@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 
 const Form = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const Form = () => {
   useEffect(() => {
     if (id) {
       const tasksInStorage = JSON.parse(localStorage.getItem("tasks")) || [];
-      const existingTask = tasksInStorage.find((t) => t.id === parseInt(id));
+      const existingTask = tasksInStorage.find((t) => t.id);
 
       if (existingTask) {
         setTask(existingTask);
@@ -41,7 +42,7 @@ const Form = () => {
       );
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     } else {
-      const taskId = tasksInStorage.length + 1; 
+      const taskId = uuid(); 
       const newTask = { id: taskId, ...task };
       const updatedTasks = [...tasksInStorage, newTask];
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));

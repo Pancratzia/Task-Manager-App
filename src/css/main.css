@@ -121,13 +121,68 @@ a {
   margin: 2rem 0;
   border: 0.2rem dashed #EA906C;
 }
+.list__priorities {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.list__priority {
+  text-transform: lowercase;
+}
+.list__priority--high {
+  border-bottom: 0.3rem solid #B31312;
+}
+.list__priority--medium {
+  border-bottom: 0.3rem solid #D9B310;
+}
+.list__priority--low {
+  border-bottom: 0.3rem solid #2B6B4C;
+}
 .list__item {
   background-color: #EEE2DE;
   padding: 2rem;
   margin: 2rem 0;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   display: flex;
   justify-content: space-between;
+}
+.list__item--high {
+  border-left: 0.5rem solid #B31312;
+}
+.list__item--medium {
+  border-left: 0.5rem solid #D9B310;
+}
+.list__item--low {
+  border-left: 0.5rem solid #2B6B4C;
+}
+
+.item__description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.item__checkbox {
+  accent-color: #B31312;
+}
+.item__status {
+  font-weight: 700;
+}
+.item__status--completed {
+  text-decoration: line-through;
+}
+.item__status--pending {
+  text-decoration: none;
+}
+.item__delete {
+  all: unset;
+  color: #B31312;
+  font-weight: 900;
+}
+.item__delete:hover {
+  color: #850e0d;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=main.css.map */

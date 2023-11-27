@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 const Task = ({ task, handleDeleteButtonClick, handleCheckboxChange }) => {
   return (
-    <li className="list__item" key={task.id}>
+    <li className={task.priority === "high" ? "list__item list__item--high" : task.priority === "low" ? "list__item list__item--low" : "list__item list__item--medium"} key={task.id}>
       <div className="item__description">
         <input
           type="checkbox"
           name="completed"
+          className="item__checkbox"
           checked={task.status === 1}
           onChange={() => handleCheckboxChange(task.id)}
         />
@@ -15,23 +16,14 @@ const Task = ({ task, handleDeleteButtonClick, handleCheckboxChange }) => {
         <Link
           to={`/edit/${task.id}`}
           className={
-            task.status === 1 ? "item item--completed" : "item item--pending"
+            task.status === 1 ? "item__status item__status--completed" : "item__status item__status--pending"
           }
         >
-          {task.name} -{" "}
-          <span
-            className={
-              task.priority === "low"
-                ? "item__priority item__priority--low"
-                : task.priority === "medium"
-                ? "item__priority item__priority--medium"
-                : "item__priority item__priority--high"
-            }
-          ></span>
+          {task.name} 
         </Link>
       </div>
 
-      <button onClick={() => handleDeleteButtonClick(task.id)}>X</button>
+      <button className="item__delete" onClick={() => handleDeleteButtonClick(task.id)}>✕</button>
     </li>
   );
 };

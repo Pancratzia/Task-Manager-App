@@ -37,12 +37,47 @@
         border: .2rem dashed v.$peach;
     }
 
+    &__priorities{
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    &__priority{
+        text-transform: lowercase;
+        &--high{
+            border-bottom: .3rem solid v.$red;
+        }
+
+        &--medium{
+            border-bottom: .3rem solid v.$yellow;
+        }
+
+        &--low{
+            border-bottom: .3rem solid v.$green;
+        }
+    }
+
     &__item{
         background-color: v.$cream;
         padding: 2rem;
         margin: 2rem 0;
-        border-radius: 1rem;
+        border-radius: .5rem;
         display: flex;
         justify-content: space-between;
+
+        &--high{
+            border-left: .5rem solid v.$red;
+        }
+
+        &--medium{
+            border-left: .5rem solid v.$yellow;
+        }
+
+        &--low{
+            border-left: .5rem solid v.$green;
+        }
     }
 }

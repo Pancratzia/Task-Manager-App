@@ -36,6 +36,12 @@ const List = () => {
       <h2 className="list__title">Task List</h2>
       <p className="list__subtitle">Mark a task as completed by clicking on their respective checkbox</p>
 
+      <ul className="list__priorities">
+        <li className="list__priority list__priority--high">High</li>
+        <li className="list__priority list__priority--medium">Medium</li>
+        <li className="list__priority list__priority--low">Low</li>
+      </ul>
+      
       {tasks.length === 0 ? (
         <p className="list__empty">No tasks available</p>
       ) : (
