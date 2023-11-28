@@ -35,6 +35,19 @@ const Form = () => {
       return;
     }
 
+    const today = new Date();
+    const formatToday =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+
+    if (!task.dueDate || task.dueDate < formatToday) {
+      alert("Due date is required and cannot be in the past!");
+      return;
+    }
+
     const tasksInStorage = JSON.parse(localStorage.getItem("tasks")) || [];
 
     if (id) {
@@ -52,7 +65,13 @@ const Form = () => {
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     }
 
-    setTask({ name: "", description: "", priority: "low", status: 0, dueDate: "" });
+    setTask({
+      name: "",
+      description: "",
+      priority: "low",
+      status: 0,
+      dueDate: "",
+    });
     alert("Task saved successfully!");
 
     if (id) {
@@ -106,34 +125,36 @@ const Form = () => {
             ></textarea>
           </div>
 
-          <div className="form__group">
-            <label className="form__label" htmlFor="priority">
-              Priority Level
-            </label>
-            <select
-              name="priority"
-              value={task.priority}
-              onChange={handleChange}
-              className="form__input form__input--select"
-            >
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-            </select>
-          </div>
+          <div className="form__grid">
+            <div className="form__group">
+              <label className="form__label" htmlFor="priority">
+                Priority
+              </label>
+              <select
+                name="priority"
+                value={task.priority}
+                onChange={handleChange}
+                className="form__input form__input--select"
+              >
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
 
-          {/* New input for due date */}
-          <div className="form__group">
-            <label className="form__label" htmlFor="dueDate">
-              Due Date
-            </label>
-            <input
-              type="date"
-              name="dueDate"
-              value={task.dueDate}
-              onChange={handleChange}
-              className="form__input form__input--date"
-            />
+            <div className="form__group">
+              <label className="form__label" htmlFor="dueDate">
+                Due Date
+              </label>
+              <input
+                type="date"
+                name="dueDate"
+                value={task.dueDate}
+                onChange={handleChange}
+                className="form__input form__input--date"
+                required
+              />
+            </div>
           </div>
         </fieldset>
         <button className="btn btn--primary" type="submit">
@@ -145,4 +166,3 @@ const Form = () => {
 };
 
 export default Form;
-

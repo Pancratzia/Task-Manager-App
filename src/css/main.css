@@ -184,6 +184,13 @@ a {
   color: #850e0d;
   cursor: pointer;
 }
+.item__date {
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+.item__date--overdue {
+  color: #B31312;
+}
 
 .form {
   background-color: #EEE2DE;
@@ -246,6 +253,11 @@ a {
 }
 .form__input--select option {
   color: #2B2A4C;
+}
+.form__grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
 }
 .form .btn {
   margin-bottom: 0;

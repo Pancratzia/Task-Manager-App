@@ -70,6 +70,10 @@
         }
     }
 
+    &__grid{
+        @include m.grid(2, 2rem);
+    }
+
     .btn{
         margin-bottom: 0;
     }
