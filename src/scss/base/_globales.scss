@@ -61,11 +61,11 @@ a{
     }
 
     &--secondary{
-        background-color: v.$cream;
-        color: v.$red;
+        background-color: v.$blue;
+        color: v.$cream;
 
         &:hover{
-            background-color: lighten(v.$cream, 10%);
+            background-color: lighten(v.$blue, 10%);
         }
     }
 

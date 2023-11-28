@@ -57,11 +57,11 @@ a {
   background-color: #850e0d;
 }
 .btn--secondary {
-  background-color: #EEE2DE;
-  color: #B31312;
+  background-color: #2B2A4C;
+  color: #EEE2DE;
 }
 .btn--secondary:hover {
-  background-color: white;
+  background-color: #3e3c6d;
 }
 .btn:hover {
   cursor: pointer;
@@ -183,6 +183,96 @@ a {
 .item__delete:hover {
   color: #850e0d;
   cursor: pointer;
+}
+
+.form {
+  background-color: #EEE2DE;
+  padding: 3rem;
+  border-radius: 3rem;
+}
+@media (min-width: 768px) {
+  .form__btn {
+    text-align: right;
+  }
+}
+.form__title {
+  text-align: center;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  text-transform: uppercase;
+  background-image: linear-gradient(90deg, #2B2A4C, #EA906C);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.form__fieldset {
+  border: 0.2rem dashed #EA906C;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+.form__legend {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #EA906C;
+}
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.form__label {
+  color: #2B2A4C;
+  font-weight: bold;
+}
+.form__input {
+  border: none;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: inherit;
+  color: #2B2A4C;
+}
+.form__input:focus {
+  outline: none;
+}
+.form__input--textarea {
+  resize: vertical;
+  min-height: 10rem;
+}
+.form__input--select {
+  appearance: none;
+}
+.form__input--select option {
+  color: #2B2A4C;
+}
+.form .btn {
+  margin-bottom: 0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+.pagination__btn {
+  all: unset;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 3rem;
+  color: #EA906C;
+}
+.pagination__btn:hover {
+  color: #B31312;
+}
+.pagination__btn:disabled {
+  color: #f7d3c5;
+  cursor: auto;
+}
+.pagination__page {
+  font-size: 1.6rem;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,0 +1,30 @@
+@use './../base/variables' as v;
+@use './../base/mixins' as m;
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+
+    &__btn{
+       all: unset;
+       font-weight: bold;
+       cursor: pointer;
+       font-size: 3rem;
+       color: v.$peach;
+
+       &:hover{
+           color: v.$red;
+       }
+
+       &:disabled{
+           color: lighten(v.$peach, 20%);
+           cursor: auto;
+       }
+    }
+
+    &__page{
+        font-size: 1.6rem;
+    }
+}
