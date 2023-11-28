@@ -101,7 +101,13 @@ To set up and run the project locally, follow these steps:
    pnpm start
    ```
 
-4. Open the application in your web browser at [http://localhost:5173/](http://localhost:5173/).
+   or
+
+   ```bash
+   pnpm run dev
+   ```
+
+5. Open the application in your web browser at [http://localhost:5173/](http://localhost:5173/).
 
 ### Project Functionality
 
