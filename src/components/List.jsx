@@ -190,7 +190,7 @@ const List = () => {
         </div>
       </div>
 
-      {tasks.length === 0 ? (
+      {tasks.length === 0 || tasksToDisplay.length === 0 ? (
         <p className="list__empty">No tasks available</p>
       ) : (
         <ul>
@@ -205,7 +205,8 @@ const List = () => {
         </ul>
       )}
 
-      <div className="pagination">
+      {tasksToDisplay.length > 0 && (
+        <div className="pagination">
         <button
           className="pagination__btn"
           onClick={goToPrevPage}
@@ -214,18 +215,19 @@ const List = () => {
           &lt;
         </button>
         <span className="pagination__page">
-          {currentPage + "/" + Math.ceil(tasks.length / tasksPerPage)}
+          {currentPage + "/" + Math.ceil(getFilteredTasks().length / tasksPerPage)}
         </span>
         <button
           className="pagination__btn"
           onClick={goToNextPage}
           disabled={
-            (currentPage - 1) * tasksPerPage + tasksPerPage >= tasks.length
+            (currentPage - 1) * tasksPerPage + tasksPerPage >= getFilteredTasks().length
           }
         >
           &gt;
         </button>
       </div>
+      )}
     </div>
   );
 };
