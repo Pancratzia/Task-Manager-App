@@ -5,17 +5,54 @@ import Task from "./Task";
 const List = () => {
   const [tasks, setTasks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [statusFilters, setStatusFilters] = useState({
+    completed: false,
+    pending: false,
+  });
+  const [priorityFilters, setPriorityFilters] = useState({
+    high: false,
+    medium: false,
+    low: false,
+  });
 
   const tasksPerPage = 5;
+
+  const getFilteredTasks = () => {
+    let filteredTasks = tasks;
+
+    if (statusFilters.completed || statusFilters.pending) {
+      filteredTasks = filteredTasks.filter((task) => {
+        return (
+          (statusFilters.completed && task.status === 1) ||
+          (statusFilters.pending && task.status === 0)
+        );
+      });
+    }
+
+    if (priorityFilters.high || priorityFilters.medium || priorityFilters.low) {
+      filteredTasks = filteredTasks.filter((task) => {
+        return (
+          (priorityFilters.high && task.priority === "high") ||
+          (priorityFilters.medium && task.priority === "medium") ||
+          (priorityFilters.low && task.priority === "low")
+        );
+      });
+    }
+
+    return filteredTasks;
+  };
 
   const getTasksForPage = () => {
     const startIndex = (currentPage - 1) * tasksPerPage;
     const endIndex = startIndex + tasksPerPage;
-    return tasks.slice(startIndex, endIndex);
+    return getFilteredTasks().slice(startIndex, endIndex);
   };
 
   const goToNextPage = () => {
-    if ((currentPage - 1) * tasksPerPage + tasksPerPage < tasks.length) {
+    if (
+      (currentPage - 1) * tasksPerPage + tasksPerPage <
+      getFilteredTasks().length
+    ) {
       setCurrentPage((prevPage) => prevPage + 1);
     }
   };
@@ -47,6 +84,20 @@ const List = () => {
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
+  const handleStatusFilterChange = (filterName) => {
+    setStatusFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: !prevFilters[filterName],
+    }));
+  };
+
+  const handlePriorityFilterChange = (filterName) => {
+    setPriorityFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: !prevFilters[filterName],
+    }));
+  };
+
   const tasksToDisplay = getTasksForPage();
 
   return (
@@ -71,15 +122,30 @@ const List = () => {
 
       <h4 className="list__filters-title">Filters</h4>
       <div className="filters">
-
         <div className="filter">
           <p className="filter__title">Status</p>
           <ul className="filter__list">
             <li className="filter__item filter__item--completed">
-              <input type="checkbox" name="completed" /> Completed
+              <label>
+                <input
+                  type="checkbox"
+                  name="completed"
+                  checked={statusFilters.completed}
+                  onChange={() => handleStatusFilterChange("completed")}
+                />
+                Completed
+              </label>
             </li>
             <li className="filter__item filter__item--pending">
-              <input type="checkbox" name="pending" /> Pending
+              <label>
+                <input
+                  type="checkbox"
+                  name="pending"
+                  checked={statusFilters.pending}
+                  onChange={() => handleStatusFilterChange("pending")}
+                />
+                Pending
+              </label>
             </li>
           </ul>
         </div>
@@ -88,17 +154,40 @@ const List = () => {
           <p className="filter__title">Priority</p>
           <ul className="filter__list">
             <li className="filter__item filter__item--high">
-              <input type="checkbox" name="high" /> High
+              <label>
+                <input
+                  type="checkbox"
+                  name="high"
+                  checked={priorityFilters.high}
+                  onChange={() => handlePriorityFilterChange("high")}
+                />
+                High
+              </label>
             </li>
             <li className="filter__item filter__item--medium">
-              <input type="checkbox" name="medium" /> Medium
+              <label>
+                <input
+                  type="checkbox"
+                  name="medium"
+                  checked={priorityFilters.medium}
+                  onChange={() => handlePriorityFilterChange("medium")}
+                />
+                Medium
+              </label>
             </li>
             <li className="filter__item filter__item--low">
-              <input type="checkbox" name="low" /> Low
+              <label>
+                <input
+                  type="checkbox"
+                  name="low"
+                  checked={priorityFilters.low}
+                  onChange={() => handlePriorityFilterChange("low")}
+                />
+                Low
+              </label>
             </li>
           </ul>
         </div>
-
       </div>
 
       {tasks.length === 0 ? (
