@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 import { v4 as uuid } from "uuid";
 
 const Form = () => {
@@ -31,7 +32,11 @@ const Form = () => {
     e.preventDefault();
 
     if (!task.name) {
-      alert("Task name is required!");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Task name is required!',
+      })
       return;
     }
 
@@ -44,7 +49,11 @@ const Form = () => {
       today.getDate();
 
     if (!task.dueDate || task.dueDate < formatToday) {
-      alert("Due date is required and cannot be in the past!");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Due date is required and must be in the future!',
+      })
       return;
     }
 
@@ -72,7 +81,12 @@ const Form = () => {
       status: 0,
       dueDate: "",
     });
-    alert("Task saved successfully!");
+    
+    Swal.fire({
+      icon: 'success',
+      title: 'Good job!',
+      text: 'Task saved successfully!',
+    })
 
     if (id) {
       navigate("/");
