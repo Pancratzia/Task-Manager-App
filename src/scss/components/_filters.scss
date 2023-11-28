@@ -1,0 +1,29 @@
+@use './../base/variables' as v;
+@use './../base/mixins' as m;
+
+.filters{
+
+    &__title{
+        @include m.title;
+        text-align: left;
+        margin: 2rem 0;
+        font-size: clamp(1.6rem, 2vw, 2.6rem);
+    }
+    display: flex;
+    gap: 3rem;
+}
+
+.filter{
+
+    &__title{
+        text-transform: uppercase;
+        color: v.$peach;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    input[type="checkbox"]{
+        accent-color: v.$red;
+    }
+
+}

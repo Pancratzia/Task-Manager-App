@@ -120,7 +120,7 @@ const List = () => {
         <li className="list__priority list__priority--low">Low</li>
       </ul>
 
-      <h4 className="list__filters-title">Filters</h4>
+      <h4 className="filters__title">Filters</h4>
       <div className="filters">
         <div className="filter">
           <p className="filter__title">Status</p>

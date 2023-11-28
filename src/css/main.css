@@ -275,4 +275,31 @@ a {
   font-size: 1.6rem;
 }
 
+.filters {
+  display: flex;
+  gap: 3rem;
+}
+.filters__title {
+  text-align: center;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  text-transform: uppercase;
+  background-image: linear-gradient(90deg, #2B2A4C, #EA906C);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: left;
+  margin: 2rem 0;
+  font-size: clamp(1.6rem, 2vw, 2.6rem);
+}
+
+.filter__title {
+  text-transform: uppercase;
+  color: #EA906C;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.filter input[type=checkbox] {
+  accent-color: #B31312;
+}
+
 /*# sourceMappingURL=main.css.map */
