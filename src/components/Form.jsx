@@ -11,6 +11,7 @@ const Form = () => {
     description: "",
     priority: "low",
     status: 0 /* 0: pending, 1: completed */,
+    dueDate: "",
   });
 
   useEffect(() => {
@@ -43,21 +44,22 @@ const Form = () => {
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     } else {
       let taskId;
-      do{
+      do {
         taskId = uuid();
-      }while(tasksInStorage.find((t) => t.id === taskId));
+      } while (tasksInStorage.find((t) => t.id === taskId));
       const newTask = { id: taskId, ...task };
       const updatedTasks = [...tasksInStorage, newTask];
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     }
 
-    setTask({ name: "", description: "", priority: "low", status: 0 });
+    setTask({ name: "", description: "", priority: "low", status: 0, dueDate: "" });
     alert("Task saved successfully!");
 
     if (id) {
       navigate("/");
     }
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTask((prevTask) => ({ ...prevTask, [name]: value }));
@@ -77,7 +79,9 @@ const Form = () => {
         <fieldset className="form__fieldset">
           <legend className="form__legend">Task Details</legend>
           <div className="form__group">
-            <label className="form__label" htmlFor="name">Name</label>
+            <label className="form__label" htmlFor="name">
+              Name
+            </label>
             <input
               type="text"
               name="name"
@@ -90,7 +94,9 @@ const Form = () => {
           </div>
 
           <div className="form__group">
-            <label className="form__label" htmlFor="description">Description</label>
+            <label className="form__label" htmlFor="description">
+              Description
+            </label>
             <textarea
               name="description"
               placeholder="Task Description"
@@ -101,7 +107,9 @@ const Form = () => {
           </div>
 
           <div className="form__group">
-            <label className="form__label" htmlFor="status">Priority Level</label>
+            <label className="form__label" htmlFor="priority">
+              Priority Level
+            </label>
             <select
               name="priority"
               value={task.priority}
@@ -113,11 +121,28 @@ const Form = () => {
               <option value="high">High</option>
             </select>
           </div>
+
+          {/* New input for due date */}
+          <div className="form__group">
+            <label className="form__label" htmlFor="dueDate">
+              Due Date
+            </label>
+            <input
+              type="date"
+              name="dueDate"
+              value={task.dueDate}
+              onChange={handleChange}
+              className="form__input form__input--date"
+            />
+          </div>
         </fieldset>
-        <button className="btn btn--primary" type="submit">Submit</button>
+        <button className="btn btn--primary" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
 };
 
 export default Form;
+
