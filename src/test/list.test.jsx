@@ -58,6 +58,17 @@ describe("List component", () => {
     screen.getByText("No tasks available");
   });
 
+  it("should render correctly with no tasks", () => {
+    render(
+      <MemoryRouter>
+        <List />
+      </MemoryRouter>
+    );
+
+    screen.getByText("Task List");
+    screen.getByText("No tasks available");
+  });
+
   it("should render a task correctly", () => {
     const tasks = [
       { id: 1, status: 0, priority: "high", name: "Task 1" },
@@ -116,13 +127,14 @@ describe("List component", () => {
     fireEvent.click(screen.getByText("Task 1"));
 
     const checkUrlChange = () => {
-        if (window.location.pathname === "/edit/1") {
-          done();
-        } else {
-          setTimeout(checkUrlChange, 100);
-        }
-      };
-  
-      checkUrlChange();
+      if (window.location.pathname === "/edit/1") {
+        done();
+      } else {
+        setTimeout(checkUrlChange, 100);
+      }
+    };
+
+    checkUrlChange();
   });
+  
 });
