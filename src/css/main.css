@@ -71,7 +71,7 @@ a {
   width: 95%;
   max-width: 120rem;
   margin: 0 auto;
-  margin: 2rem auto;
+  padding: 3rem 0 1rem;
 }
 .layout__title {
   text-align: center;
